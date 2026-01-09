@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Weather App</title>
+  </head>
+
+  <body>
+    <h2>Weather Information</h2>
+
+    <label>Latitude:</label>
+    <input type="number" id="lat" placeholder="example: 22.06" />
+    <br /><br />
+
+    <label>Longitude:</label>
+    <input type="number" id="lon" placeholder="example: 88.08" />
+    <br /><br />
+
+    <button
+      onclick="getWeather()"
+      style="background-color: aqua; border-radius: 10px"
+    >
+      Submit
+    </button>
+
+    <hr />
+
+    <div id="weatherOutput"></div>
+    <br />
+
+    <div id="mapOutput"></div>
+
+    <script>
+      async function getWeather() {
+        const lat = document.getElementById("lat").value;
+        const lon = document.getElementById("lon").value;
+        const weatherOutput = document.getElementById("weatherOutput");
+        const mapOutput = document.getElementById("mapOutput");
+
+        if (!lat || !lon) {
+          weatherOutput.innerHTML = "Please enter both latitude and longitude.";
+          return;
+        }
+
+        try {
+          // WEATHER FETCH (Open-Meteo)
+          const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+          );
+          const data = await response.json();
+          const weather = data.current_weather;
+
+          weatherOutput.innerHTML = `
+            <h3>Current Weather</h3>
+            Temperature: ${weather.temperature} °C <br>
+            Wind Speed: ${weather.windspeed} km/h <br>
+            Wind Direction: ${weather.winddirection}° <br>
+            Weather Code: ${weather.weathercode}
+          `;
+
+          // MAP (OpenStreetMap iframe – NO API KEY)
+          const delta = 0.05; // controls zoom
+          const minLon = parseFloat(lon) - delta;
+          const minLat = parseFloat(lat) - delta;
+          const maxLon = parseFloat(lon) + delta;
+          const maxLat = parseFloat(lat) + delta;
+
+          const mapUrl = `
+            https://www.openstreetmap.org/export/embed.html
+            ?bbox=${minLon},${minLat},${maxLon},${maxLat}
+            &layer=mapnik
+            &marker=${lat},${lon}
+          `.replace(/\s/g, "");
+
+          mapOutput.innerHTML = `
+            <h3>Location Map</h3>
+            <iframe
+              width="600"
+              height="400"
+              src="${mapUrl}"
+              style="border:1px solid #ccc; pointer-events: none;"
+            ></iframe>
+          `;
+        } catch (error) {
+          weatherOutput.innerHTML = "Error fetching weather data.";
+          console.error(error);
+        }
+      }
+    </script>
+  </body>
+</html>

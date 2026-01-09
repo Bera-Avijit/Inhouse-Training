@@ -1,0 +1,25 @@
+Funtion : Standalone, user defined
+Method : Need support of an object
+
+
+METHOD     --------  RETURN  ----------      USE CASE
+
+forEach()  ---------  no     -------------    looping
+
+map()      ---------  yes    ------------     modify element
+
+filter()    --------  yes    -------------    select element
+
+reduce()    --------   no    -------------     sum
+
+
+// Homework
+A student satallite and weather info dashboard
+
+input:
+latitude and longitude
+
+press submit button
+
+output:
+weather and image of location

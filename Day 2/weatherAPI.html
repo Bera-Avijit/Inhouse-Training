@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <h2>Weather Info</h2>
+    <button onclick="getWeather()"> Get Weather</button>
+
+    <p id="output"></p>
+
+    <script>
+        async function getWeather() {
+            const output = document.getElementById("output");
+
+            try{
+                const response = await fetch(
+                    "https://api.open-meteo.com/v1/forecast?latitude=22.06&longitude=88.08&current_weather=true"
+                );
+                const data = await response.json();
+                const weather = data.current_weather;
+
+                output.innerHTML = `
+                    Temperature : ${weather.temperature} °C <br>
+                    Wind Speed : ${weather.windspeed} km/h <br>
+                    Weather Code : ${weather.weathercode}
+                `;
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+    </script>
+</body>
+</html>

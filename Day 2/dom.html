@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>DOM Demo</title>
+    <style>
+        .box{
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="mainTitle">DOM Demonstration</h1>
+
+    <p class="text box">Paragraph 1</p>
+    <p class="text box">Paragraph 2</p>
+
+    <input type="text" id="inputBox" placeholder="Type Something...">
+
+    <br><br>
+
+    <button id="clickBtn">click Me</button>
+    <button ondblclick="doubleClick()">Double click me</button>
+
+    <br><br>
+
+    <form id="myForm">
+        <input type="text" placeholder="Enter name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="hiddenPara" class="hidden">I am hidden Text</p>
+
+    <br>
+
+    <button onclick="printPage()">Print page</button>
+
+    <script>
+        const title = document.getElementById("mainTitle");
+        console.log("getElementById : ",title);
+
+        const classElement = document.getElementsByClassName("text");
+        console.log("getElementByClassName : ", classElement);
+
+        const tagElement = document.getElementsByTagName("p");
+        console.log("getElementByTagName : ",tagElement);
+
+        const firstPara = document.querySelector(".text");
+        console.log("querySelector : ", firstPara);
+
+        const allPara = document.querySelectorAll(".text");
+        console.log("querySelectorAll : ", allPara);
+
+        console.log("tagName : ", title.tagName);
+        console.log("innerText : ", title.innerText);
+        console.log("innerHtml : ", title.innerHTML);
+        console.log("textContent : ", document.getElementById("hiddenPara").textContent);
+
+        title.setAttribute("title", "This is a heading");
+        console.log("getAttribute : ", title.getAttribute("title"));
+
+        document.getElementById("clickBtn").addEventListener("click",() =>{
+            alert("Button Clicked");
+        });
+
+        function doubleClick() {
+            alert("Button Doubled Clicked");
+        }
+
+        document.getElementById("inputBox").addEventListener("keydown", (event) => {
+            console.log("Key Down : ", event.key);
+        });
+
+        document.getElementById("inputBox").addEventListener("keyup", (event) => {
+            console.log("Key Up : ", event.key);
+        });
+
+        document.getElementById("myForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+            alert("Form Submitted");
+        });
+
+        function printPage() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

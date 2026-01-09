@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback vs Promise vs Async/Await</title>
+</head>
+<body>
+    <h2>Open console to see output</h2>
+    <button onclick="runExample()">Run Example</button>
+
+    <script>
+        function runExample(){
+
+            console.log("CALLBACK EXAMPLE");
+
+            function fetchDataCallback(Callback){
+                setTimeout(() =>{
+                    Callback("Callback : Data Fetched");
+                }, 1000);
+            }
+            fetchDataCallback((message)=>{
+                console.log(message);
+                console.log("Callback : Processing Data");
+            });
+
+            console.log("PROMISE EXAMPLE");
+
+            function fetchDataPromise(){
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve("Promise : Data fetched");
+                    },2000);
+                });
+            }
+            fetchDataPromise()
+            .then((message) => {
+                console.log(message);
+                console.log("Promise : Processing Data");
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+            console.log("ASYNC / AWAIT EXAMPLE");
+
+            async function fetchDataAsync() {
+                try{
+                    const message = await fetchDataPromise();
+                    console.log("Async.Await : ",message);
+                    c4onsole.log("Async/Await : Processing Data");
+                }
+                catch(error){
+                    console.log(error);
+                }
+            }
+            fetchDataAsync();
+        }
+    </script>
+</body>
+</html>

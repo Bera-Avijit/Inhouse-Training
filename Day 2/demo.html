@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather & Location Finder</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box; /* Ensures padding doesn't widen element */
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Result Section - Hidden by default */
+        #result-section {
+            display: none;
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .weather-info {
+            background: #eef7ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .weather-info p {
+            margin: 0.5rem 0;
+            color: #444;
+        }
+
+        /* Map Container */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        /* Use an iframe for the map */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* This makes the interactive map behave like a static image */
+            pointer-events: none; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Location & Weather</h2>
+        
+        <div class="input-group">
+            <label for="latitude">Latitude</label>
+            <input type="number" id="latitude" placeholder="e.g. 40.7128" step="any">
+        </div>
+
+        <div class="input-group">
+            <label for="longitude">Longitude</label>
+            <input type="number" id="longitude" placeholder="e.g. -74.0060" step="any">
+        </div>
+
+        <button onclick="getWeatherAndMap()">Get Information</button>
+
+        <div id="result-section">
+            <div class="weather-info">
+                <h3>Current Weather</h3>
+                <p><strong>Temperature:</strong> <span id="temp">--</span>°C</p>
+                <p><strong>Wind Speed:</strong> <span id="wind">--</span> km/h</p>
+                <p><strong>Condition Code:</strong> <span id="condition">--</span></p>
+            </div>
+
+            <div class="map-container">
+                <iframe id="map-frame" src=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getWeatherAndMap() {
+            const lat = document.getElementById('latitude').value;
+            const lon = document.getElementById('longitude').value;
+            const resultSection = document.getElementById('result-section');
+
+            // Basic Validation
+            if (!lat || !lon) {
+                alert("Please enter both latitude and longitude.");
+                return;
+            }
+
+            // 1. Fetch Weather Data (Using Open-Meteo API for real-time data)
+            // Note: NASA APIs (like NASA POWER) are generally for historical/climate data, not current weather.
+            const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+            try {
+                const response = await fetch(weatherUrl);
+                const data = await response.json();
+                
+                if (data.current_weather) {
+                    document.getElementById('temp').innerText = data.current_weather.temperature;
+                    document.getElementById('wind').innerText = data.current_weather.windspeed;
+                    document.getElementById('condition').innerText = data.current_weather.weathercode; // Simple WMO code
+                    
+                    // Show the result section
+                    resultSection.style.display = 'block';
+                } else {
+                    alert("Could not fetch weather data.");
+                }
+            } catch (error) {
+                console.error("Error fetching weather:", error);
+                alert("Error fetching weather data. Please check your internet.");
+            }
+
+            // 2. Generate Static Map (Using OpenStreetMap Embed)
+            // We create a small bounding box around the lat/lon to center the map
+            const delta = 0.05; // Zoom level controller
+            const minLon = parseFloat(lon) - delta;
+            const minLat = parseFloat(lat) - delta;
+            const maxLon = parseFloat(lon) + delta;
+            const maxLat = parseFloat(lat) + delta;
+
+            const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${minLon},${minLat},${maxLon},${maxLat}&layer=mapnik&marker=${lat},${lon}`;
+            
+            document.getElementById('map-frame').src = mapUrl;
+        }
+    </script>
+
+</body>
+</html>
