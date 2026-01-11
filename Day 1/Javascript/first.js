@@ -20,10 +20,10 @@ else{
 
 /*
 if(-1){
-    console.log("jsqd")
+    console.log("true")
 }
 else{
-    console.log("not jsqd")
+    console.log("not true")
 }
 */
 
