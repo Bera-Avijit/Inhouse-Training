@@ -12,7 +12,7 @@ console.log("After toString : ", str);
 
 let t = ["Vivek", "Ram"];
 let x = s.concat(t);
-console.log("Concat : ",x)
+console.log("Concat : ",x);
 
 s.unshift("Rahul")
 console.log("Unshift: ",s);
@@ -21,6 +21,8 @@ let r = s.shift();
 console.log(r);
 console.log("Shift : ",s)
 
+
+// slice(start index, end index)
 console.log("Slice : ",s.slice(1,3));
 
 // splice(start, deleteCount, newElement())
