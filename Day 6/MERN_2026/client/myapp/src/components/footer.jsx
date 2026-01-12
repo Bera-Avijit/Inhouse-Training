@@ -1,7 +1,9 @@
+import "../css/footer.css";
+
 export const Footer = () => {
   return (
     <>
-      <h1>Footer Page</h1>
+      <h1 className="main-footer-div">Footer Page</h1>
     </>
   );
 };

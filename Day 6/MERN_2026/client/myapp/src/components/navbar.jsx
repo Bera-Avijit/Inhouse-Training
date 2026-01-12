@@ -1,17 +1,23 @@
 import { NavLink } from "react-router-dom";
+import "../css/navbar.css";
 
 export const Navbar = () => {
   return (
     <>
-      <div>
-        <ul style={{ listStyleType: "none" }}>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/about">About</NavLink>
-          </li>
-        </ul>
+      <div className="main-nav-div">
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );

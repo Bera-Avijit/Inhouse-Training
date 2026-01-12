@@ -1,0 +1,44 @@
+/* Fixed footer */
+.main-header-div {
+  position: fixed;
+  top : 0;
+  /* bottom: 6; */
+  left: 0;
+  width: 100%;
+  height: 6vh;
+  background-color: #0a192e; /* Blue */
+  color: white;
+
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+
+  font-size: 16px;
+  z-index: 100;
+}
+
+.header-logo{
+    width: 45px;
+    object-fit: contain;
+    align-items: center;
+    justify-content: left;
+    margin-right: 10px;
+    margin-left: 30px;
+    height: auto;
+}
+
+.header-title{
+    font-size: 20px;
+    position: absolute;
+    /* object-fit: contain; */
+    /* align-items: center; */
+    justify-content: center;
+    left: 50%;
+    /* margin-right: 10px; */
+}
+
+@media (max-width:768px){
+    .main-header-div{
+        display: none;
+    }
+}
