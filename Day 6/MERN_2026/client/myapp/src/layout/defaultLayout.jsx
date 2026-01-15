@@ -4,11 +4,13 @@ import { Outlet } from "react-router-dom"
 import { Navbar } from "../components/navbar"
 import { Header } from "../components/header"
 import { Footer } from "../components/footer"
+// import { NavbarScroll } from "../components/scrollSpyNavbar"
 
 export const DefaultLayout = () => {
   return (
     <>
       <Navbar />
+      {/* <NavbarScroll /> */}
       <Header />
       <main style={{marginTop:"10vh"}}>
         <Outlet />

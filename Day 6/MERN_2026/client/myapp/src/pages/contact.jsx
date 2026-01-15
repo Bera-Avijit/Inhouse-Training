@@ -1,13 +1,69 @@
+import "../css/contact.css";
+import "../css/register.css";
+
 export const Contact = () => {
   return (
     <>
-      <h1>Contact Page</h1>
-      <div className="container-info">
-        <p><strong>Institute Name : <strong>Haldia Institute of Technology</strong></strong></p>
+      <div className="contact-container">
+        <div className="contact-info">
+          <p>
+            <strong>Institute Name:</strong> Haldia Institute of Technology
+          </p>
+          <p>
+            <strong>Address:</strong> ICARE Complex, Hatiberia, Haldia, Purba
+            Medinipur, West Bengal – 721657
+          </p>
+          <p>
+            <strong>Phone:</strong> +91 3224 252900 / 252901
+          </p>
+          <p>
+            <strong>Email:</strong> info@hithaldia.ac.in
+          </p>
+          <p>
+            <strong>Website:</strong> www.hithaldia.ac.in
+          </p>
+        </div>
+        <div className="contact-description">
+          <p>
+            Haldia Institute of Technology (HIT) is one of the leading technical
+            institutions in Eastern India, committed to excellence in education,
+            research, and innovation. The institute provides a vibrant academic
+            environment with modern infrastructure and experienced faculty.
+          </p>
+        </div>
+        <div className="map-container">
+          <iframe
+            title="hit"
+            src="https://www.google.com/maps?q=Haldia%20Institute%20of%20Technology&output=embed"
+            width="80%"
+            height="400"
+            style={{ border: 0.2 }}
+            allowFullScreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+        {/* <a href="/register">Registration Page</a> */}
       </div>
 
-      <div className="map-container">
-        <iframe src="https://www.google.com/" frameborder="0" width="80%" height="400px"></iframe>
+      {/* Contact Form */}
+      <div className="contact-form">
+        <h2>Queries !!</h2>
+
+        <form>
+          <label>Name:</label>
+          <input type="text" placeholder="Enter your name" required />
+
+          <label>Phone:</label>
+          <input type="number" placeholder="Enter your phone number" required />
+
+          <label>Email:</label>
+          <input type="email" placeholder="Enter your email" required />
+
+          <label>Message:</label>
+          <textarea rows="4" placeholder="Enter your message" required />
+
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </>
   );
