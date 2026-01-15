@@ -9,6 +9,7 @@ const registationSchema = joi.object({
   email: joi.string().email({ minDomainSegments: 2 }).required().messages({
     "string.email": "Please provide a valid email address",
   }),
+  phone: joi.string().pattern(/^\d+$/).min(10).max(13),
   password: joi
     .string()
     .pattern(
@@ -21,11 +22,6 @@ const registationSchema = joi.object({
       "string.pattern.base":
         "Password must be 8-30 characters long, include at least one letter, one number, and one special character",
     }),
-  phone: joi
-    .string()
-    .pattern(/^\d+$/)
-    .min(10)
-    .max(13),
 });
 
 module.exports = registationSchema;
