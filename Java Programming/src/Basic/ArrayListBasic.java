@@ -1,9 +1,6 @@
 package Basic;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class ArrayListBasic {
     public static void main(String[] args) {
@@ -30,5 +27,7 @@ public class ArrayListBasic {
         l3.offer(6);
         System.out.println("Priority Queue: " + l3);
         l3.poll();
+
+        ArrayDeque<Integer> a1 = new ArrayDeque<>();
     }
 }
