@@ -1,12 +1,12 @@
 package Basic;
 
-public class Student {
+public class Students {
 
     String name;
     int rollno;
     String dept;
 
-    public Student(String name, int rollno, String dept) {
+    public Students(String name, int rollno, String dept) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -24,9 +24,9 @@ public class Student {
 
     public static void main(String[] args) {
         // create a class student with fields name, rollno, dept and condition when creating objects that name cannot be null, roll no cannot be 0 or less dept can only be computer science
-        Student student1 = new Student("Alice", 1, "Computer Science");
-        Student student3 = new Student("Bob", 2, "Computer Science");
-        Student student4 = new Student(null, 3, "Mathematics");
+        Students student1 = new Students("Alice", 1, "Computer Science");
+        Students student3 = new Students("Bob", 2, "Computer Science");
+        Students student4 = new Students(null, 3, "Mathematics");
     }
 
 }
