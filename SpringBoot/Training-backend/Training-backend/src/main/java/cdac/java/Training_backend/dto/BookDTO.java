@@ -8,7 +8,7 @@ public class BookDTO {
     private String isbn;
     private String title;
     private String author;
-    private boolean available;
+    private boolean available = true;
     private String bookType; // e.g., "NOVEL", "TEXTBOOK"
     private String genre; // for NovelBook
     private String subject; // for Textbook
